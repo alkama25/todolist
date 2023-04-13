@@ -1,4 +1,5 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,8 +12,26 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.ts', 'public/js')
-    .vue()
-    .postCss('resources/css/app.css', 'public/css', [require("tailwindcss")
+mix.ts("resources/js/app.ts", "public/js")
+    .vue({ version: 3 })
+    .postCss("resources/css/app.css", "public/css", [
+        require("tailwindcss"),
         //
-    ]);
+    ])
+    .webpackConfig({
+        resolve: {
+            alias: {
+                "@": path.resolve("resources/js"),
+            },
+            extensions: [".js", ".vue", ".json", ".ts"],
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    loader: "ts-loader",
+                    options: { appendTsSuffixTo: [/\.vue$/] },
+                },
+            ],
+        },
+    });
