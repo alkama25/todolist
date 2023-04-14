@@ -10,10 +10,8 @@ import TodoItem from "../components/TodoItem.vue";
 import { useTodoListStore } from '../store/index'
 import { Todo } from "../types";
 
-const listItems = useTodoListStore().todoListItems
-
-const completedList = computed<Todo[]>(() => listItems.length
-  ? listItems.filter((todo: Todo) => todo.completed === 1)
+const completedList = computed<Todo[]>(() => useTodoListStore().todoListItems.length
+  ? useTodoListStore().todoListItems.filter((todo: Todo) => todo.completed === 1)
   : []
 );
 </script>

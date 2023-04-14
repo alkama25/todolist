@@ -26,7 +26,7 @@
         </div>
 
         <div
-            class="flex h-8 w-8 items-center justify-center text-gray-dark hover:text-black hover:rounded-full hover:bg-red-100"
+            class="flex h-8 w-8 items-center justify-center text-gray-dark hover:text-black hover:rounded-full hover:bg-red-100 cursor-pointer"
             @click="deleteTodo"
         >
             <svg
@@ -35,7 +35,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-5 h-5 text-red-500 cursor-pointer"
+                class="w-5 h-5 text-red-500"
             >
                 <path
                     stroke-linecap="round"

@@ -12,8 +12,8 @@ import { Todo } from "../types";
 
 const listItems = useTodoListStore().todoListItems
 
-const pendingList = computed<Todo[]>(() => listItems.length
-  ? listItems.filter((todo: Todo) => todo.completed === 0)
+const pendingList = computed<Todo[]>(() => useTodoListStore().todoListItems.length
+  ? useTodoListStore().todoListItems.filter((todo: Todo) => todo.completed === 0)
   : []
 );
 </script>

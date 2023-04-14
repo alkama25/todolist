@@ -9,6 +9,14 @@ interface State {
 export const useTodoListStore = defineStore("todoList", {
     state: (): State => ({ todoListItems: [] }),
     actions: {
+        async getTodoList(): Promise<void> {
+            const response = await apiRequest<Todo>({
+                method: "get",
+                url: "api/items",
+            });
+            console.log(":::",response)
+            this.todoListItems = response.data
+        },
         async createTodoItem(param: string): Promise<void> {
             const payload: CreateTodoPayload = { item: { name: param } };
             const response = await apiRequest<Todo>({
