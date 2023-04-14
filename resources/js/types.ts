@@ -12,3 +12,5 @@ export interface ApiResponse<T> {
 }
 
 export type CreateTodoPayload = Record<string,  Pick<Todo, 'name'> >;
+
+export type UpdateTodo = Record<string,  Pick<Todo, 'completed'> >;

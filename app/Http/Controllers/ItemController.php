@@ -38,6 +38,7 @@ class ItemController extends Controller
     {
         $newItem = new Item;
         $newItem->name = $request->item['name'];
+        $newItem->completed = 0;
         $newItem->save();
 
         return $newItem;
@@ -77,7 +78,7 @@ class ItemController extends Controller
         $existingItem = Item::find($id);
 
         if($existingItem) {
-            $existingItem->completed = $request->item['completed'] ? true : false;
+            $existingItem->completed = $request->item['completed'] ? 1 : 0;
             $existingItem->completed_at = $request->item['completed'] ? Carbon::now() : null;
             $existingItem->save();
             return $existingItem;

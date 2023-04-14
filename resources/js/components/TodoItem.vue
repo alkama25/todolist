@@ -4,11 +4,24 @@
             <input
                 type="checkbox"
                 class="w-5 h-5 mt-0.5 rounded-full focus:ring-white shadow-sm cursor-pointer"
+                v-model="checked"
+                @click="markAsComplete"
             />
 
             <div class="ml-2">
-                <p class="text-sm">Item</p>
-                <p class="text-xs text-gray-500">Today</p>
+                <p
+                    class="text-sm"
+                    :class="
+                        props.listItem.completed === 1
+                            ? 'text-gray-500 line-through'
+                            : 'text-black'
+                    "
+                >
+                    {{ listItem.name }}
+                </p>
+                <p class="text-xs text-gray-500">
+                    {{ useFormattedDate(listItem.created_at) }}
+                </p>
             </div>
         </div>
 
@@ -29,4 +42,18 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import { useFormattedDate } from "../composables/formatDate";
+import { useTodoListStore } from "../store/index";
+import type { Todo } from "../types";
+
+const props = defineProps<{
+    listItem: Todo;
+}>();
+const checked = ref<boolean>(!!props.listItem.completed);
+const markAsComplete = (event: Event) => {
+    checked.value = (event.target as HTMLInputElement).checked;
+    useTodoListStore().markAsComplete(Number(checked.value), props.listItem.id);
+};
+</script>
