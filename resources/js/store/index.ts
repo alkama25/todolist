@@ -30,5 +30,15 @@ export const useTodoListStore = defineStore("todoList", {
             );
             if (todoToUpdate) Object.assign(todoToUpdate, { ...response.data });
         },
+        async deleteTodo(id: number): Promise<void> {
+            const response = await apiRequest<Todo>({
+                method: "delete",
+                url: `api/item/${id}`,
+            });
+            const index = this.todoListItems.findIndex(
+                (todo) => todo.id === id
+            );
+            if (index !== -1) this.todoListItems.splice(index, 1);
+        },
     },
 });
