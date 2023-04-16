@@ -1,11 +1,13 @@
 <template>
-    <section v-if="completedList.length">
+    <section>
         <CustomTransition>
-            <TodoItem
-                v-for="item in completedList"
-                :key="item.id"
-                :listItem="item"
-            ></TodoItem>
+            <template v-if="completedList.length">
+                <TodoItem
+                    v-for="item in completedList"
+                    :key="item.id"
+                    :listItem="item"
+                ></TodoItem>
+            </template>
         </CustomTransition>
     </section>
 </template>

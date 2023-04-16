@@ -1,11 +1,13 @@
 <template>
-    <section v-if="pendingList.length">
+    <section>
         <CustomTransition>
-            <TodoItem
-                v-for="item in pendingList"
-                :key="item.id"
-                :listItem="item"
-            ></TodoItem>
+            <template v-if="pendingList.length">
+                <TodoItem
+                    v-for="item in pendingList"
+                    :key="item.id"
+                    :listItem="item"
+                ></TodoItem>
+            </template>
         </CustomTransition>
     </section>
 </template>
